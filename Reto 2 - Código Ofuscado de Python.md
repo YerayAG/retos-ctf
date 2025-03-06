@@ -1,11 +1,10 @@
-### **Reto 2: Código Ofuscado (Python/JavaScript)**
+### **Reto 2: Código Ofuscado Python**
 **Tema principal**: Ingeniería inversa + análisis estático/dinámico + manipulación de argumentos.
 
 ---
 
 #### **Implementación Paso a Paso**:
 
-##### **Versión Python**:
 1. **Código Ofuscado**:
   ```python
   import sys, base64
