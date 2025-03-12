@@ -49,21 +49,6 @@
     - `-loop 0`: Bucle infinito.
     - `-r 2`: 2 fps para fluidez.
 
-##### **4. Añadir Ruido (Variante Difícil)**:
-- **Corromper píxeles** aleatoriamente en cada fragmento con Python:
-  ```python
-  import random
-
-  for i, fragment in enumerate(fragments):
-      pixels = fragment.load()
-      for _ in range(50):  # 50 píxeles dañados por fragmento
-          x = random.randint(0, fragment.width - 1)
-          y = random.randint(0, fragment.height - 1)
-          pixels[x, y] = (255, 255, 255)  # Blanco (ruido)
-      fragment.save(f"fragment_noisy_{i}.png")
-  ```
-- **Genera el GIF con ruido** y entrégalo como archivo principal.
-
 ---
 
 #### **Cómo lo Resolverían los Jugadores**:
@@ -96,25 +81,9 @@
   combined.save("reconstructed_qr.png")
   ```
 
-##### **3. Leer el QR (Con/Sin Ruido)**:
+##### **3. Leer el QR**:
 - **Herramientas**:
-  - **Sin ruido**: Usar lectores estándar como `zbarimg`:
+  - Usar lectores estándar como `zbarimg`:
     ```bash
     zbarimg reconstructed_qr.png --raw
     ```
-  - **Con ruido**:
-    - Reparar manualmente los píxeles dañados (en GIMP).
-    - Usar `zbarimg` con opciones de tolerancia:
-      ```bash
-      zbarimg --raw -Sdisable -Sqrcode.enable=1 reconstructed_qr.png
-      ```
-
----
-
-#### **Variantes para Mayor Dificultad**:
-- **Fragmentos Desordenados**:
-  - Mezclar el orden de los fotogramas en el GIF. Los jugadores deben descubrir la secuencia correcta (pista: números en nombres de archivo o metadatos).
-- **QR Parcialmente Enmascarado**:
-  - Añadir una capa semi-transparente sobre el GIF que oculte partes del QR hasta que se elimine con herramientas como `stegsolve`.
-- **QR en Escala de Grises con Canales RGB**:
-  - Dividir el QR en canales R, G, B (cada uno en un fragmento) y requerir combinarlos.
